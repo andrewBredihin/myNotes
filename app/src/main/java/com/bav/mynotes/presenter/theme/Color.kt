@@ -1,4 +1,4 @@
-package com.bav.mynotes.ui.theme
+package com.bav.mynotes.presenter.theme
 
 import androidx.compose.ui.graphics.Color
 
