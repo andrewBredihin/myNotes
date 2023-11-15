@@ -4,11 +4,11 @@ import com.bav.mynotes.domain.notes.models.Note
 
 interface NoteRepository {
 
-    fun getNotes(): List<Note>
+    suspend fun getNotes(): List<Note>
 
-    fun getNoteById(id: String): Note
+    suspend fun getNoteById(id: String): Note
 
-    fun saveNote(note: Note): Boolean
+    suspend fun saveNote(note: Note): Boolean
 
-    fun updateNote(note: Note): Boolean
+    suspend fun updateNote(note: Note): Boolean
 }

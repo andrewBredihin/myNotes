@@ -5,7 +5,7 @@ import com.bav.mynotes.domain.notes.repository.NoteRepository
 
 class GetNotesUseCase(private val repository: NoteRepository) {
 
-    fun execute(): List<Note> {
+    suspend fun execute(): List<Note> {
         return repository.getNotes()
     }
 }

@@ -3,7 +3,12 @@ package com.bav.mynotes.presenter
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -11,8 +16,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.bav.mynotes.presenter.theme.MyNotesTheme
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.style.TextOverflow
+import com.bav.mynotes.domain.notes.models.Note
+import com.bav.mynotes.presenter.theme.CustomTheme
+import com.bav.mynotes.presenter.theme.MainTheme
 import org.koin.androidx.compose.koinViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -25,8 +37,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             viewModel.loadNotes()
 
-            MyNotesTheme {
-                // A surface container using the 'background' color from the theme
+            MainTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
@@ -61,11 +72,44 @@ fun Greeting(modifier: Modifier = Modifier, viewModel: NotesViewModel = koinView
             )
         }
 
-        is NoteListState.DataProvided -> {
-            Text(
-                text = (state as NoteListState.DataProvided).data.notes.size.toString(),
-                modifier = modifier,
-            )
+        is NoteListState.NotesProvided -> {
+            val list by remember {
+                mutableStateOf((state as NoteListState.NotesProvided).data.notes)
+            }
+            Box {
+                NoteView(
+                    note = list[0],
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            }
         }
+
+        is NoteListState.NoteProvided -> {
+            // TODO: navigation
+        }
+    }
+}
+
+@Composable
+fun NoteView(
+    note: Note,
+    modifier: Modifier = Modifier,
+) {
+    Row(
+        modifier = modifier
+            .padding(horizontal = CustomTheme.shapes.padding)
+            .clip(shape = CustomTheme.shapes.cornerStyle)
+            .background(color = CustomTheme.colors.primary)
+            .padding(all = CustomTheme.shapes.padding),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Text(
+            text = note.title,
+            style = CustomTheme.typography.body,
+            modifier = Modifier
+                .fillMaxWidth(),
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis,
+        )
     }
 }

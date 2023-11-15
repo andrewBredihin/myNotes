@@ -6,7 +6,6 @@ import com.bav.mynotes.domain.notes.usecase.GetNoteByIdUseCase
 import com.bav.mynotes.domain.notes.usecase.GetNotesUseCase
 import com.bav.mynotes.domain.notes.usecase.SaveNoteUseCase
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -25,16 +24,27 @@ class NotesViewModel(
         _notesState.value = NoteListState.Loading
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                delay(3000)
-                val list = getNotesUseCase.execute()
-                val data = NoteListData(notes = list)
+                val data = NoteListData(notes = getNotesUseCase.execute())
                 withContext(Dispatchers.Main) {
-                    _notesState.value = NoteListState.DataProvided(data)
+                    _notesState.value = NoteListState.NotesProvided(data)
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
                     _notesState.value = NoteListState.Error(e.stackTrace.contentDeepToString())
                 }
+            }
+        }
+    }
+
+    fun getNoteById(id: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val data = NoteData(note = getNoteByIdUseCase.execute(id))
+                withContext(Dispatchers.Main) {
+                    _notesState.value = NoteListState.NoteProvided(data)
+                }
+            } catch (e: Exception) {
+                loadNotes()
             }
         }
     }
