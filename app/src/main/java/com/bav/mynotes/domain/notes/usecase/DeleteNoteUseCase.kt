@@ -3,9 +3,9 @@ package com.bav.mynotes.domain.notes.usecase
 import com.bav.mynotes.domain.notes.models.Note
 import com.bav.mynotes.domain.notes.repository.NoteRepository
 
-class GetNotesUseCase(private val repository: NoteRepository) {
+class DeleteNoteUseCase(private val repository: NoteRepository) {
 
-    suspend fun execute(): List<Note> {
-        return repository.getNotes()
+    suspend fun execute(note: Note): Boolean {
+        return repository.deleteDote(note)
     }
 }

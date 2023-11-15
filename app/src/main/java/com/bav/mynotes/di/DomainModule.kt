@@ -1,5 +1,6 @@
 package com.bav.mynotes.di
 
+import com.bav.mynotes.domain.notes.usecase.DeleteNoteUseCase
 import com.bav.mynotes.domain.notes.usecase.GetNoteByIdUseCase
 import com.bav.mynotes.domain.notes.usecase.GetNotesUseCase
 import com.bav.mynotes.domain.notes.usecase.SaveNoteUseCase
@@ -15,4 +16,6 @@ val domainModule = module {
     factory { SaveNoteUseCase(repository = get()) }
 
     factory { UpdateNoteUseCase(repository = get()) }
+
+    factory { DeleteNoteUseCase(repository = get()) }
 }

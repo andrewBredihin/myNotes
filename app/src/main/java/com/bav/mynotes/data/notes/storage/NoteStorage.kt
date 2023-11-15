@@ -4,11 +4,9 @@ import com.bav.mynotes.data.notes.models.NoteEntity
 
 interface NoteStorage {
 
-    fun get(): List<NoteEntity>
-
-    fun getById(id: String): NoteEntity
-
-    fun save(note: NoteEntity): Boolean
-
-    fun update(note: NoteEntity): Boolean
+    suspend fun get(): List<NoteEntity>
+    suspend fun getById(id: String): NoteEntity
+    suspend fun save(note: NoteEntity): Boolean
+    suspend fun update(note: NoteEntity): Boolean
+    suspend fun delete(note: NoteEntity): Boolean
 }

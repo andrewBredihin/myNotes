@@ -11,6 +11,8 @@ val appModule = module {
             getNotesUseCase = get(),
             getNoteByIdUseCase = get(),
             saveNoteUseCase = get(),
+            updateNoteUseCase = get(),
+            deleteNoteUseCase = get(),
         )
     }
 }
