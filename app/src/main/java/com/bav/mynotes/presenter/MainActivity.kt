@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -97,6 +98,7 @@ fun NoteView(
 ) {
     Row(
         modifier = modifier
+            .defaultMinSize(CustomTheme.shapes.minSize)
             .padding(horizontal = CustomTheme.shapes.padding)
             .clip(shape = CustomTheme.shapes.cornerStyle)
             .background(color = CustomTheme.colors.primary)

@@ -25,6 +25,7 @@ data class CustomThemeTypography(
 
 data class CustomThemeShape(
     val padding: Dp,
+    val minSize: Dp,
     val cornerStyle: Shape,
 )
 

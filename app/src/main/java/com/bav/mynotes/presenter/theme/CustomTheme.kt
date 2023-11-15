@@ -21,13 +21,13 @@ fun MainTheme(
     val colors = when (darkTheme) {
         true -> {
             when (style) {
-                CustomThemeStyle.Primary -> baseLightPalette
+                CustomThemeStyle.Primary -> baseDarkPalette
             }
         }
 
         false -> {
             when (style) {
-                CustomThemeStyle.Primary -> baseDarkPalette
+                CustomThemeStyle.Primary -> baseLightPalette
             }
         }
     }
@@ -59,6 +59,9 @@ fun MainTheme(
     val shapes = CustomThemeShape(
         padding = when (paddingSize) {
             CustomThemeSize.Medium -> 10.dp
+        },
+        minSize = when (paddingSize) {
+            CustomThemeSize.Medium -> 50.dp
         },
         cornerStyle = when (corners) {
             CustomThemeCorners.Flat -> RoundedCornerShape(0.dp)
