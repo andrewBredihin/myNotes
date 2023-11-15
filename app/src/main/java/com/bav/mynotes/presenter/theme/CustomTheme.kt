@@ -49,7 +49,7 @@ fun MainTheme(
         ),
         toolbar = TextStyle(
             fontSize = when (textSize) {
-                CustomThemeSize.Medium -> 20.sp
+                CustomThemeSize.Medium -> 24.sp
             },
             fontWeight = FontWeight.Bold,
             color = colors.primaryText,

@@ -21,4 +21,8 @@ class NoteRepositoryImpl(private val storage: NoteStorage) : NoteRepository {
     override suspend fun updateNote(note: Note): Boolean {
         return storage.update(NoteConverter().modelToEntity(note))
     }
+
+    override suspend fun deleteDote(note: Note): Boolean {
+        return storage.delete(NoteConverter().modelToEntity(note))
+    }
 }

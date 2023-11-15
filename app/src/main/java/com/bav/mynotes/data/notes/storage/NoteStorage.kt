@@ -8,4 +8,5 @@ interface NoteStorage {
     suspend fun getById(id: String): NoteEntity
     suspend fun save(note: NoteEntity): Boolean
     suspend fun update(note: NoteEntity): Boolean
+    suspend fun delete(note: NoteEntity): Boolean
 }

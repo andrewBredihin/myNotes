@@ -2,9 +2,11 @@ package com.bav.mynotes.presenter
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bav.mynotes.domain.notes.usecase.DeleteNoteUseCase
 import com.bav.mynotes.domain.notes.usecase.GetNoteByIdUseCase
 import com.bav.mynotes.domain.notes.usecase.GetNotesUseCase
 import com.bav.mynotes.domain.notes.usecase.SaveNoteUseCase
+import com.bav.mynotes.domain.notes.usecase.UpdateNoteUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,6 +17,8 @@ class NotesViewModel(
     private val getNotesUseCase: GetNotesUseCase,
     private val getNoteByIdUseCase: GetNoteByIdUseCase,
     private val saveNoteUseCase: SaveNoteUseCase,
+    private val updateNoteUseCase: UpdateNoteUseCase,
+    private val deleteNoteUseCase: DeleteNoteUseCase,
 ) : ViewModel() {
 
     private val _notesState = MutableStateFlow<NoteListState>(NoteListState.Default)
