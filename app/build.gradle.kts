@@ -48,6 +48,8 @@ android {
     }
 }
 
+val koin_version = "3.5.0"
+
 dependencies {
 
     implementation("androidx.core:core-ktx:1.9.0")
@@ -65,4 +67,7 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    implementation("io.insert-koin:koin-androidx-compose:$koin_version")
+    implementation("io.insert-koin:koin-android-test:$koin_version")
 }
