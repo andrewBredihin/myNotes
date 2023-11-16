@@ -1,13 +1,12 @@
-package com.bav.mynotes.presenter
+package com.bav.mynotes.presenter.notes
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bav.mynotes.domain.notes.usecase.DeleteNoteUseCase
-import com.bav.mynotes.domain.notes.usecase.GetNoteByIdUseCase
 import com.bav.mynotes.domain.notes.usecase.GetNotesUseCase
-import com.bav.mynotes.domain.notes.usecase.SaveNoteUseCase
 import com.bav.mynotes.domain.notes.usecase.UpdateNoteUseCase
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -15,8 +14,6 @@ import kotlinx.coroutines.withContext
 
 class NotesViewModel(
     private val getNotesUseCase: GetNotesUseCase,
-    private val getNoteByIdUseCase: GetNoteByIdUseCase,
-    private val saveNoteUseCase: SaveNoteUseCase,
     private val updateNoteUseCase: UpdateNoteUseCase,
     private val deleteNoteUseCase: DeleteNoteUseCase,
 ) : ViewModel() {
@@ -27,6 +24,7 @@ class NotesViewModel(
     fun loadNotes() {
         _notesState.value = NoteListState.Loading
         viewModelScope.launch(Dispatchers.IO) {
+            delay(100)
             try {
                 val data = NoteListData(notes = getNotesUseCase.execute())
                 withContext(Dispatchers.Main) {
@@ -36,19 +34,6 @@ class NotesViewModel(
                 withContext(Dispatchers.Main) {
                     _notesState.value = NoteListState.Error(e.stackTrace.contentDeepToString())
                 }
-            }
-        }
-    }
-
-    fun getNoteById(id: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val data = NoteData(note = getNoteByIdUseCase.execute(id))
-                withContext(Dispatchers.Main) {
-                    _notesState.value = NoteListState.NoteProvided(data)
-                }
-            } catch (e: Exception) {
-                loadNotes()
             }
         }
     }

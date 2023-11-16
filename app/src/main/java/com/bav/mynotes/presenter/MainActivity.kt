@@ -30,6 +30,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
 import com.bav.mynotes.domain.notes.models.Note
+import com.bav.mynotes.presenter.noteinfo.NoteInfoComposable
+import com.bav.mynotes.presenter.notes.NoteListState
+import com.bav.mynotes.presenter.notes.NotesViewModel
 import com.bav.mynotes.presenter.theme.CustomTheme
 import com.bav.mynotes.presenter.theme.MainTheme
 import org.koin.androidx.compose.koinViewModel
@@ -63,7 +66,13 @@ class MainActivity : ComponentActivity() {
                         )
                     },
                     content = { paddingValues ->
-                        NoteList(
+                        /*NoteList(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(paddingValues),
+                        )*/
+                        NoteInfoComposable(
+                            id = "1",
                             modifier = Modifier
                                 .fillMaxSize()
                                 .padding(paddingValues),
@@ -120,10 +129,6 @@ private fun NoteList(modifier: Modifier = Modifier, viewModel: NotesViewModel = 
                     }
                 }
             }
-        }
-
-        is NoteListState.NoteProvided -> {
-            // TODO: navigation
         }
     }
 }

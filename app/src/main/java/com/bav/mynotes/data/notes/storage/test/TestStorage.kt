@@ -5,8 +5,23 @@ import com.bav.mynotes.data.notes.models.TaskEntity
 import com.bav.mynotes.data.notes.storage.NoteStorage
 
 class TestStorage : NoteStorage {
+
+    private var _note = NoteEntity(
+        id = "1",
+        title = "Test",
+        tasks = listOf(
+            TaskEntity(id = "1", content = "Test1"),
+            TaskEntity(id = "2", content = "Test"),
+            TaskEntity(id = "3", content = "Test"),
+        ),
+    )
+
     override suspend fun get(): List<NoteEntity> {
-        val tasks = listOf(TaskEntity(id = "1", content = "Test"))
+        val tasks = listOf(
+            TaskEntity(id = "1", content = "Test1"),
+            TaskEntity(id = "2", content = "Test"),
+            TaskEntity(id = "3", content = "Test"),
+        )
         return listOf(
             NoteEntity(id = "1", title = "Test", tasks = tasks),
             NoteEntity(id = "2", title = "Test", tasks = tasks),
@@ -39,8 +54,7 @@ class TestStorage : NoteStorage {
     }
 
     override suspend fun getById(id: String): NoteEntity {
-        val tasks = listOf(TaskEntity(id = "1", content = "Test"))
-        return NoteEntity(id = "1", title = "Test", tasks = tasks)
+        return _note
     }
 
     override suspend fun save(note: NoteEntity): Boolean {
@@ -48,6 +62,7 @@ class TestStorage : NoteStorage {
     }
 
     override suspend fun update(note: NoteEntity): Boolean {
+        _note = note
         return true
     }
 
