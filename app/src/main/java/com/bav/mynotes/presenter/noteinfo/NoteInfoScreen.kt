@@ -43,6 +43,11 @@ import com.bav.mynotes.domain.notes.models.Task
 import com.bav.mynotes.presenter.theme.CustomTheme
 import org.koin.androidx.compose.koinViewModel
 
+fun testFunDelete() {
+    val a = 5
+    // FIXME
+}
+
 @Composable
 fun NoteInfoComposable(
     id: String,
