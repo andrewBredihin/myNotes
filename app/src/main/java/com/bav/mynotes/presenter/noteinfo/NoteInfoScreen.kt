@@ -48,6 +48,10 @@ fun testFunDelete() {
     // FIXME
 }
 
+fun testDelete() {
+    // FIXME
+}
+
 @Composable
 fun NoteInfoComposable(
     id: String,
